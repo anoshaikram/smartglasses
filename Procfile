@@ -1,2 +1,3 @@
-web: gunicorn smartglasses.wsgi
+web: gunicorn smartglasses.wsgi:application
+
 
