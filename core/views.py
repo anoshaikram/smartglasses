@@ -6,6 +6,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework import generics, permissions
 from .models import GlassesLocation
 from .serializers import GlassesLocationSerializer
+from django.http import HttpResponse
 
 # Signup API
 @api_view(["POST"])
@@ -48,3 +49,7 @@ class GetLocationView(generics.ListAPIView):
             return GlassesLocation.objects.filter(user=self.request.user, glasses_id=glasses_id).order_by('-timestamp')[:1]
         return GlassesLocation.objects.filter(user=self.request.user).order_by('-timestamp')
 
+# smartglasses/views.py
+
+def home(request):
+    return HttpResponse("Welcome to the homepage!")
