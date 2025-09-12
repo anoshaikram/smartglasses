@@ -7,6 +7,7 @@ from rest_framework import generics, permissions
 from .models import GlassesLocation
 from .serializers import GlassesLocationSerializer
 from django.http import HttpResponse
+from django.urls import reverse
 
 # Signup API
 @api_view(["POST"])
@@ -52,4 +53,13 @@ class GetLocationView(generics.ListAPIView):
 # smartglasses/views.py
 
 def home(request):
-    return HttpResponse("Welcome to the homepage!")
+    html = f"""
+    <h1>Welcome to Smart Glasses API</h1>
+    <ul>
+        <li><a href="{reverse('signup')}">Signup</a></li>
+        <li><a href="{reverse('login')}">Login</a></li>
+        <li><a href="{reverse('update-location')}">Update Location</a></li>
+        <li><a href="{reverse('get-location')}">Get Location</a></li>
+    </ul>
+    """
+    return HttpResponse(html)
