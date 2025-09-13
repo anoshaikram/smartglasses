@@ -1,4 +1,5 @@
 from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from rest_framework.decorators import api_view
 from rest_framework import status
 from .serializers import UserSignupSerializer, UserLoginSerializer
@@ -53,3 +54,13 @@ class GetLocationView(generics.ListAPIView):
 
 def home(request):
     return HttpResponse("Welcome to the homepage!")
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'signup':reverse('signup', request=request,format=format),
+        'login':reverse('login', request=request,format=format),
+        'get-location':reverse('get-location', request=request,format=format),
+        'update-location':reverse('update-location', request=request,format=format)
+
+    })
